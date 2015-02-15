@@ -7,9 +7,9 @@ import grails.converters.JSON
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(OrganizationController)
-@Mock(Organization)
-class OrganizationControllerSpec extends Specification {
+@TestFor(DepartmentController)
+@Mock(Department)
+class DepartmentControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -32,8 +32,8 @@ class OrganizationControllerSpec extends Specification {
         when:"The save action is executed with an invalid instance"
             // Make sure the domain class has at least one non-null property
             // or this test will fail.
-            def organization = new Organization()
-            controller.save(organization)
+            def department = new Department()
+            controller.save(department)
 
         then:"The response status is NOT_ACCEPTABLE"
             response.status == NOT_ACCEPTABLE.value
@@ -41,13 +41,13 @@ class OrganizationControllerSpec extends Specification {
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            organization = new Organization(params)
+            department = new Department(params)
 
-            controller.save(organization)
+            controller.save(department)
 
         then:"The response status is CREATED and the instance is returned"
             response.status == CREATED.value
-            response.text == (organization as JSON).toString()
+            response.text == (department as JSON).toString()
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -59,8 +59,8 @@ class OrganizationControllerSpec extends Specification {
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def organization = new Organization()
-            controller.update(organization)
+            def department = new Department()
+            controller.update(department)
 
         then:"The response status is NOT_ACCEPTABLE"
             response.status == NOT_ACCEPTABLE.value
@@ -68,12 +68,12 @@ class OrganizationControllerSpec extends Specification {
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            organization = new Organization(params).save(flush: true)
-            controller.update(organization)
+            department = new Department(params).save(flush: true)
+            controller.update(department)
 
         then:"The response status is OK and the updated instance is returned"
             response.status == OK.value
-            response.text == (organization as JSON).toString()
+            response.text == (department as JSON).toString()
     }
 
     void "Test that the delete action deletes an instance if it exists"() {
@@ -86,16 +86,16 @@ class OrganizationControllerSpec extends Specification {
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def organization = new Organization(params).save(flush: true)
+            def department = new Department(params).save(flush: true)
 
         then:"It exists"
-            Organization.count() == 1
+            Department.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(organization)
+            controller.delete(department)
 
         then:"The instance is deleted"
-            Organization.count() == 0
+            Department.count() == 0
             response.status == NO_CONTENT.value
     }
 }

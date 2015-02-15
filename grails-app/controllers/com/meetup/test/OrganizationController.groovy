@@ -1,104 +1,100 @@
 package com.meetup.test
 
-
+import grails.converters.JSON
+import grails.converters.XML
+import grails.rest.RestfulController
+import org.restapidoc.annotation.RestApi
+import org.restapidoc.annotation.RestApiMethod
+import org.restapidoc.annotation.RestApiParam
+import org.restapidoc.annotation.RestApiParams
+import org.restapidoc.pojo.RestApiParamType
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-class OrganizationController {
+@RestApi(name = "Organization Services", description = "Methods for managing Organizations")
+class OrganizationController extends RestfulController<Organization> {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static responseFormats = ['json', 'xml']
+/*    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]*/
 
+	OrganizationController(){
+		super(Organization)
+	}
+
+	@RestApiMethod(description="Get Organizations",listing = true)
+	@RestApiParams(params=[
+			@RestApiParam(name="max", type="int", paramType = RestApiParamType.PATH,
+					description = "max limit")
+	])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Organization.list(params), model:[organizationInstanceCount: Organization.count()]
+        respond Organization.list(params), [status: OK]
     }
 
-    def show(Organization organizationInstance) {
-        respond organizationInstance
-    }
+	@Override
+	@RestApiMethod(description="Get a Organization")
+	@RestApiParams(params=[
+			@RestApiParam(name="id", type="int", paramType = RestApiParamType.PATH,description = "id of the Organization")
+	])
+	def show() {
+		println("id: ${params.id} qs ${params.toQueryString()}")
+		def organizationInstance = Organization.read(params.id)
+		if (!organizationInstance) {
+			response.status = 404
+			render "Not found!"
+		} else {
+			render params.format =="json" ? organizationInstance as JSON :organizationInstance
+		}
+	}
 
-    def create() {
-        respond new Organization(params)
-    }
-
-    @Transactional
+	@Transactional
+	@RestApiMethod(description="Create Organization")
     def save(Organization organizationInstance) {
         if (organizationInstance == null) {
-            notFound()
+            render status: NOT_FOUND
             return
         }
 
+        organizationInstance.validate()
         if (organizationInstance.hasErrors()) {
-            respond organizationInstance.errors, view:'create'
+            render status: NOT_ACCEPTABLE
             return
         }
 
         organizationInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'organization.label', default: 'Organization'), organizationInstance.id])
-                redirect organizationInstance
-            }
-            '*' { respond organizationInstance, [status: CREATED] }
-        }
-    }
-
-    def edit(Organization organizationInstance) {
-        respond organizationInstance
+        respond organizationInstance, [status: CREATED]
     }
 
     @Transactional
+		@RestApiMethod(description="Update Organization")
     def update(Organization organizationInstance) {
         if (organizationInstance == null) {
-            notFound()
+            render status: NOT_FOUND
             return
         }
 
+        organizationInstance.validate()
         if (organizationInstance.hasErrors()) {
-            respond organizationInstance.errors, view:'edit'
+            render status: NOT_ACCEPTABLE
             return
         }
 
         organizationInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Organization.label', default: 'Organization'), organizationInstance.id])
-                redirect organizationInstance
-            }
-            '*'{ respond organizationInstance, [status: OK] }
-        }
+        respond organizationInstance, [status: OK]
     }
 
     @Transactional
+		@RestApiMethod(description="Delete Organization")
     def delete(Organization organizationInstance) {
 
         if (organizationInstance == null) {
-            notFound()
+            render status: NOT_FOUND
             return
         }
 
         organizationInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Organization.label', default: 'Organization'), organizationInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'organization.label', default: 'Organization'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
+        render status: NO_CONTENT
     }
 }

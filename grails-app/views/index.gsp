@@ -115,7 +115,13 @@
 					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
 						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
 					</g:each>
+
 				</ul>
+                <g:set value="http://localhost:8080/grail-rest-sample/restApiDoc/?doc_url=http://localhost:8080/grail-rest-sample/restApiDoc/api#" var="das"/>
+
+                <a href="${das}">API Doc</a>
+
+
 			</div>
 		</div>
 	</body>

@@ -1,0 +1,395 @@
+{
+   "basePath": "http://localhost:8080/grail-rest-sample",
+   "apis": [
+      {
+         "methods": [
+            {
+               "headers": [],
+               "bodyobject": null,
+               "jsondocId": "ebfa63d7-36d2-4d0f-97ae-3ed49a4c7c73",
+               "consumes": [],
+               "response": {
+                  "mapKeyObject": "",
+                  "jsondocId": "05476938-387f-4ccb-8342-9f44e63ccb8a",
+                  "mapValueObject": "",
+                  "object": "department"
+               },
+               "pathparameters": [{
+                  "jsondocId": "4c39efc2-470c-4c8a-95d3-cbb8a8f60967",
+                  "description": "The Department Id",
+                  "name": "deptId",
+                  "allowedvalues": [],
+                  "format": "",
+                  "required": "true",
+                  "type": "string"
+               }],
+               "apierrors": [],
+               "verb": "GET",
+               "description": "Get a Department",
+               "queryparameters": [],
+               "path": "/api/departments/{id}.json",
+               "produces": ["application/json"],
+               "methodName": "show"
+            },
+            {
+               "headers": [],
+               "bodyobject": {
+                  "mapKeyObject": "",
+                  "jsondocId": "627163d9-f0e3-42a1-a814-c8fe22d08abe",
+                  "mapValueObject": "",
+                  "map": "",
+                  "object": "department",
+                  "multiple": "Unknow"
+               },
+               "jsondocId": "2ccbd645-019a-4db5-ae10-dae88ac73586",
+               "consumes": ["application/json"],
+               "response": {
+                  "mapKeyObject": "",
+                  "jsondocId": "333f4dc2-7a40-46ef-b896-8b65c37f96f3",
+                  "mapValueObject": "",
+                  "object": "department"
+               },
+               "pathparameters": [],
+               "apierrors": [],
+               "verb": "POST",
+               "description": "Add a Department",
+               "queryparameters": [],
+               "path": "/department/save.json",
+               "produces": ["application/json"],
+               "methodName": "save"
+            },
+            {
+               "headers": [],
+               "bodyobject": null,
+               "jsondocId": "a178bffb-27cb-4179-b62d-84bdaeaaa4d2",
+               "consumes": [],
+               "response": {
+                  "mapKeyObject": "",
+                  "jsondocId": "11e18e35-78d2-4db8-aaef-1722688cd9ce",
+                  "mapValueObject": "",
+                  "object": "department"
+               },
+               "pathparameters": [{
+                  "jsondocId": "14e52cb8-682c-4741-b518-03e082ae90e1",
+                  "description": "Max limit",
+                  "name": "max",
+                  "allowedvalues": [],
+                  "format": "",
+                  "required": "true",
+                  "type": "int"
+               }],
+               "apierrors": [],
+               "verb": "GET",
+               "description": "List Departments",
+               "queryparameters": [],
+               "path": "/api/departments",
+               "produces": ["application/json"],
+               "methodName": "index"
+            },
+            {
+               "headers": [],
+               "bodyobject": {
+                  "mapKeyObject": "",
+                  "jsondocId": "c0b8dfd4-76f6-4485-b058-0f9a45f5f033",
+                  "mapValueObject": "",
+                  "map": "",
+                  "object": "department",
+                  "multiple": "Unknow"
+               },
+               "jsondocId": "fe9a15e7-fcc7-4d79-a10f-dc3ead3391e7",
+               "consumes": ["application/json"],
+               "response": {
+                  "mapKeyObject": "",
+                  "jsondocId": "c9a2941c-ec44-4c48-9902-e8ec9e758688",
+                  "mapValueObject": "",
+                  "object": "department"
+               },
+               "pathparameters": [{
+                  "jsondocId": "e5fe5e5a-0deb-458f-8e9f-689c313b4aca",
+                  "description": "The book id",
+                  "name": "deptId",
+                  "allowedvalues": [],
+                  "format": "",
+                  "required": "true",
+                  "type": "string"
+               }],
+               "apierrors": [],
+               "verb": "PUT",
+               "description": "Edit a Department",
+               "queryparameters": [],
+               "path": "/api/departments/{id}.json",
+               "produces": ["application/json"],
+               "methodName": "update"
+            }
+         ],
+         "jsondocId": "0c827723-e7cc-4427-9dd0-9e39a96b3428",
+         "description": "Methods for managing Department",
+         "name": "Department Services"
+      },
+      {
+         "methods": [
+            {
+               "headers": [],
+               "bodyobject": null,
+               "jsondocId": "4a9874a7-16f8-48f3-a770-7774d0753adf",
+               "consumes": [],
+               "response": {
+                  "mapKeyObject": "",
+                  "jsondocId": "524f6161-cc4a-4f7b-9aa4-78c877470def",
+                  "mapValueObject": "",
+                  "object": "organization"
+               },
+               "pathparameters": [{
+                  "jsondocId": "3371cf41-5eae-4616-9df4-f38ed5b78453",
+                  "description": "id of the Organization",
+                  "name": "id",
+                  "allowedvalues": [],
+                  "format": "",
+                  "required": "true",
+                  "type": "int"
+               }],
+               "apierrors": [],
+               "verb": "GET",
+               "description": "Get a Organization",
+               "queryparameters": [],
+               "path": "/api/organizations/{id}.json",
+               "produces": ["application/json"],
+               "methodName": "show"
+            },
+            {
+               "headers": [],
+               "bodyobject": {
+                  "mapKeyObject": "",
+                  "jsondocId": "e1985383-9253-4a99-b0ca-8ed65b4a92e5",
+                  "mapValueObject": "",
+                  "map": "",
+                  "object": "organization",
+                  "multiple": "Unknow"
+               },
+               "jsondocId": "095ff563-0556-4d62-ac16-ac5dc4f3a1b6",
+               "consumes": ["application/json"],
+               "response": {
+                  "mapKeyObject": "",
+                  "jsondocId": "6239d87a-46eb-4cfd-81e6-6ac7b4a4e40a",
+                  "mapValueObject": "",
+                  "object": "organization"
+               },
+               "pathparameters": [],
+               "apierrors": [],
+               "verb": "POST",
+               "description": "Create Organization",
+               "queryparameters": [],
+               "path": "/organization/save.json",
+               "produces": ["application/json"],
+               "methodName": "save"
+            },
+            {
+               "headers": [],
+               "bodyobject": null,
+               "jsondocId": "ed2f4f87-79ff-4762-9b99-f82e1835c390",
+               "consumes": [],
+               "response": {
+                  "mapKeyObject": "",
+                  "jsondocId": "99e0d8f1-96df-4ddb-a3ee-574b07843345",
+                  "mapValueObject": "",
+                  "object": "organization"
+               },
+               "pathparameters": [{
+                  "jsondocId": "05d20cd3-86a3-4464-8301-6fc6e93c5084",
+                  "description": "max limit",
+                  "name": "max",
+                  "allowedvalues": [],
+                  "format": "",
+                  "required": "true",
+                  "type": "int"
+               }],
+               "apierrors": [],
+               "verb": "GET",
+               "description": "Get Organizations",
+               "queryparameters": [],
+               "path": "/api/organizations",
+               "produces": ["application/json"],
+               "methodName": "index"
+            },
+            {
+               "headers": [],
+               "bodyobject": null,
+               "jsondocId": "f67f36bb-c338-4d89-867e-8698ab94da60",
+               "consumes": [],
+               "response": {
+                  "mapKeyObject": "",
+                  "jsondocId": "82d50f2a-c2c9-4cdb-8f92-b1f9511f2677",
+                  "mapValueObject": "",
+                  "object": "organization"
+               },
+               "pathparameters": [],
+               "apierrors": [],
+               "verb": "DELETE",
+               "description": "Delete Organization",
+               "queryparameters": [],
+               "path": "/api/organizations/{id}.json",
+               "produces": ["application/json"],
+               "methodName": "delete"
+            },
+            {
+               "headers": [],
+               "bodyobject": {
+                  "mapKeyObject": "",
+                  "jsondocId": "47edb415-c0a2-40f4-b9ea-cead4e29c6ff",
+                  "mapValueObject": "",
+                  "map": "",
+                  "object": "organization",
+                  "multiple": "Unknow"
+               },
+               "jsondocId": "0e32206e-4cac-4316-b222-cba4c4ab02e6",
+               "consumes": ["application/json"],
+               "response": {
+                  "mapKeyObject": "",
+                  "jsondocId": "f49a2599-6bc4-459f-b7fe-4ccbf066637e",
+                  "mapValueObject": "",
+                  "object": "organization"
+               },
+               "pathparameters": [],
+               "apierrors": [],
+               "verb": "PUT",
+               "description": "Update Organization",
+               "queryparameters": [],
+               "path": "/api/organizations/{id}.json",
+               "produces": ["application/json"],
+               "methodName": "update"
+            }
+         ],
+         "jsondocId": "229fc12b-2cc3-4f76-a884-6583041bc95a",
+         "description": "Methods for managing Organizations",
+         "name": "Organization Services"
+      }
+   ],
+   "objects": [
+      {
+         "jsondocId": "067c6cef-346b-4d54-b1b3-3a08d70694a1",
+         "description": "Department",
+         "name": "department",
+         "fields": [
+            {
+               "jsondocId": "b6069352-db0b-42b5-b656-38e91a1d7903",
+               "description": "Department Id",
+               "presentInResponse": true,
+               "mandatory": true,
+               "name": "deptId",
+               "allowedvalues": null,
+               "useForCreation": true,
+               "format": null,
+               "defaultValue": null,
+               "type": "String",
+               "multiple": "false"
+            },
+            {
+               "jsondocId": "dbf611d1-8596-48a7-8ae7-2a3fc14e4237",
+               "description": "Department Name",
+               "presentInResponse": true,
+               "mandatory": true,
+               "name": "name",
+               "allowedvalues": null,
+               "useForCreation": true,
+               "format": null,
+               "defaultValue": null,
+               "type": "String",
+               "multiple": "false"
+            }
+         ]
+      },
+      {
+         "jsondocId": "9a32b395-7777-454b-9b46-cf646f5a3792",
+         "description": "Organization",
+         "name": "organization",
+         "fields": [
+            {
+               "jsondocId": "0455a7a9-1f11-4f17-9777-f8fe56193bd8",
+               "description": "Name of the Organization",
+               "presentInResponse": true,
+               "mandatory": true,
+               "name": "name",
+               "allowedvalues": null,
+               "useForCreation": true,
+               "format": null,
+               "defaultValue": null,
+               "type": "String",
+               "multiple": "false"
+            },
+            {
+               "jsondocId": "a3b5a438-15af-4136-bbd5-1681c65460f9",
+               "description": "Users of the Organization",
+               "presentInResponse": true,
+               "mandatory": false,
+               "name": "users",
+               "allowedvalues": null,
+               "useForCreation": false,
+               "format": null,
+               "defaultValue": null,
+               "type": "List",
+               "multiple": "true"
+            }
+         ]
+      },
+      {
+         "jsondocId": "22c295cb-78f9-4c1b-af38-abf5feaa568b",
+         "description": "User",
+         "name": "user",
+         "fields": [
+            {
+               "jsondocId": "30f8599f-8f6e-463a-80b9-beaaf0c89462",
+               "description": "email of the User",
+               "presentInResponse": true,
+               "mandatory": true,
+               "name": "emailId",
+               "allowedvalues": null,
+               "useForCreation": true,
+               "format": null,
+               "defaultValue": null,
+               "type": "String",
+               "multiple": "false"
+            },
+            {
+               "jsondocId": "6dea3194-c3b4-4473-b40c-0f9a9c2a3979",
+               "description": "Photo image URL",
+               "presentInResponse": true,
+               "mandatory": false,
+               "name": "logoImageUrl",
+               "allowedvalues": null,
+               "useForCreation": true,
+               "format": null,
+               "defaultValue": "Undefined",
+               "type": "String",
+               "multiple": "false"
+            },
+            {
+               "jsondocId": "c5098a24-e54c-4c6d-9675-b992c56efbe9",
+               "description": "name of the User",
+               "presentInResponse": true,
+               "mandatory": true,
+               "name": "name",
+               "allowedvalues": null,
+               "useForCreation": true,
+               "format": null,
+               "defaultValue": null,
+               "type": "String",
+               "multiple": "false"
+            },
+            {
+               "jsondocId": "3d67ca76-9b67-40e2-982d-1506b9c41ca5",
+               "description": "username for the User",
+               "presentInResponse": true,
+               "mandatory": true,
+               "name": "username",
+               "allowedvalues": null,
+               "useForCreation": true,
+               "format": null,
+               "defaultValue": null,
+               "type": "String",
+               "multiple": "false"
+            }
+         ]
+      }
+   ],
+   "version": "0.1.1"
+}

@@ -1,6 +1,9 @@
 package com.meetup.test
 
-
+import org.restapidoc.annotation.RestApiMethod
+import org.restapidoc.annotation.RestApiParam
+import org.restapidoc.annotation.RestApiParams
+import org.restapidoc.pojo.RestApiParamType
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -8,97 +11,72 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class UserController {
 
+    static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+	@RestApiMethod(description="Get Users",listing = true)
+	@RestApiParams(params=[
+			@RestApiParam(name="max", type="int", paramType = RestApiParamType.PATH,
+					description = "max limit")
+	])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond User.list(params), model:[userInstanceCount: User.count()]
+        respond User.list(params), [status: OK]
     }
 
-    def show(User userInstance) {
-        respond userInstance
-    }
-
-    def create() {
-        respond new User(params)
-    }
-
+	@RestApiMethod(description="Get a User")
+	@RestApiParams(params=[
+			@RestApiParam(name="username", type="String", paramType = RestApiParamType.PATH,description = "username of the User")
+	])
+	def show() {
+		respond User.findByUsername(params.username), [status: OK]
+	}
     @Transactional
+		@RestApiMethod(description="Create User")
     def save(User userInstance) {
         if (userInstance == null) {
-            notFound()
+            render status: NOT_FOUND
             return
         }
 
+        userInstance.validate()
         if (userInstance.hasErrors()) {
-            respond userInstance.errors, view:'create'
+            render status: NOT_ACCEPTABLE
             return
         }
 
         userInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-                redirect userInstance
-            }
-            '*' { respond userInstance, [status: CREATED] }
-        }
-    }
-
-    def edit(User userInstance) {
-        respond userInstance
+        respond userInstance, [status: CREATED]
     }
 
     @Transactional
+		@RestApiMethod(description="Update User")
     def update(User userInstance) {
         if (userInstance == null) {
-            notFound()
+            render status: NOT_FOUND
             return
         }
 
+        userInstance.validate()
         if (userInstance.hasErrors()) {
-            respond userInstance.errors, view:'edit'
+            render status: NOT_ACCEPTABLE
             return
         }
 
         userInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
-                redirect userInstance
-            }
-            '*'{ respond userInstance, [status: OK] }
-        }
+        respond userInstance, [status: OK]
     }
 
     @Transactional
+		@RestApiMethod(description="Delete User")
     def delete(User userInstance) {
 
         if (userInstance == null) {
-            notFound()
+            render status: NOT_FOUND
             return
         }
 
         userInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
+        render status: NO_CONTENT
     }
 }
